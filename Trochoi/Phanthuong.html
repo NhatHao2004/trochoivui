@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phần Thưởng</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff; /* Light blue background */
+            margin: 0;
+            padding: 0;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .reward-container {
+            width: 90%;
+            max-width: 600px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        h1 {
+            color: #ff3366; /* Love theme color */
+            font-size: 3em; /* Increased font size for the congratulatory message */
+        }
+        p {
+            font-size: 1.8em; /* Increased font size for better visibility */
+            margin: 20px 0;
+        }
+        .reward-image {
+            width: 160px;
+            height: 200px;
+            border-radius: 10px;
+            margin: 20px auto; /* Center images horizontally */
+            display: block; /* Ensure images are block elements */
+        }
+        .reward-container {
+            display: flex; /* Use flexbox for layout */
+            flex-direction: column; /* Stack items vertically */
+            align-items: center; /* Center items horizontally */
+        }
+        button {
+            margin-top: 20px; /* Add space above the button */
+            width: 50%; /* Make button stretch to full width */
+        }
+        button {
+            padding: 12px;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background-color: #ff3366; /* Love theme button color */
+            color: white;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #720328; /* Lighter pink on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="reward-container">
+        <h1>Chúc mừng em 🎉</h1> 
+        <h3>Em đã hoàn thành trò chơi ròi đó 🏆</h3>
+        <h3>Chúc em một ngày tràn đầy niềm vui và hạnh phúc nhé 🌈</h3>
+        <img class="reward-image" src="images/anh1.jpg" alt="Phần thưởng" style="animation: blink 1s infinite;">
+        <img class="reward-image" src="images/anh2.jpg" alt="Phần thưởng" style="animation: blink 1s infinite;">
+        <img class="reward-image" src="images/anh3.jpg" alt="Phần thưởng" style="animation: blink 1s infinite;">
+        <style>
+            @keyframes blink {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.5; }
+            }
+        </style>
+        <button onclick="window.location.href='Trochoivuive.html'">Quay lại trang chính</button>
+    </div>
+</body>
+</html>

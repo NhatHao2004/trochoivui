@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trò chơi tính toán</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffe6f2; /* Light pink background */
+            margin: 0;
+            padding: 0;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        h1 {
+            color: #ff3366; /* Love theme color */
+            font-size: 2.2em;
+        }
+        .question {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .answers {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+        button {
+            padding: 12px;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background-color: #ff3366; /* Love theme button color */
+            color: white;
+            transition: 0.3s;
+            display: flex; /* Added to enable flexbox */
+            justify-content: center; /* Center the content horizontally */
+            align-items: center; /* Center the content vertically */
+        }
+        button:hover {
+            background-color: #720328; /* Lighter pink on hover */
+        }
+        #result-message {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        #image-container {
+            display: none;
+            margin-top: 20px;
+        }
+        #reward-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        #next-button, #gift-container {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TRÒ CHƠI TÍNH TOÁN</h1>
+        <p id="question-text" class="question"></p>
+        <div class="answers">
+            <button class="answer-btn" data-index="0">A</button>
+            <button class="answer-btn" data-index="1">B</button>
+            <button class="answer-btn" data-index="2">C</button>
+        </div>
+        <div id="result-message"></div>
+        <div id="image-container">
+            <img id="reward-image" src="" alt="Hình ảnh thưởng">
+        </div>
+        <button id="next-button">Tiếp đi nào</button>
+        <div id="gift-container">
+            <h2>Phần thưởng dành cho em 😘</h2>
+            <h5>Mỗi ngày dành một chút niềm vui cho em</h5>
+            <h5>Xin lỗi vì đã sử dụng ảnh của em mà chưa được sự đồng ý</h5>
+            <a href="Phanthuong.html" id="gift-box" style="display: flex; justify-content: center; align-items: center; animation: blink 1s infinite;">
+                <img src="images/hopqua.jpg" alt="Hộp quà" style="width: 150px; height: 150px; display: flex; justify-content: center; align-items: center; margin: auto;"> 
+            </a>
+            <style>
+                @keyframes blink {
+                    0%, 100% { opacity: 1; }
+                    50% { opacity: 0.5; }
+                }
+            </style>
+        </div>
+    </div>
+    <script>
+        const questions = [
+            { question: "4 + 5 = ?", answers: ["8", "9", "10"], correct: 1 },
+            { question: "10 - 4 = ?", answers: ["6", "7", "8"], correct: 0 },
+            { question: "6 x 2 = ?", answers: ["10", "12", "13"], correct: 1 },
+            { question: "8 : 4 = ?", answers: ["1", "2", "3"], correct: 1 },
+            { question: "5 + 7 = ?", answers: ["10", "11", "12"], correct: 2 },
+            { question: "9 - 3 = ?", answers: ["5", "6", "7"], correct: 1 },
+            { question: "4 x 2 = ?", answers: ["6", "7", "8"], correct: 2 },
+            { question: "12 : 3 = ?", answers: ["3", "4", "5"], correct: 1 }
+        ];
+        
+        let currentQuestionIndex = 0;
+        let answeredCorrectly = false;
+        let wrongAnswersCount = 0; // Count of wrong answers
+
+        const questionText = document.getElementById('question-text');
+        const answerButtons = document.querySelectorAll('.answer-btn');
+        const resultMessage = document.getElementById('result-message');
+        const imageContainer = document.getElementById('image-container');
+        const rewardImage = document.getElementById('reward-image');
+        const nextButton = document.getElementById('next-button');
+        const giftContainer = document.getElementById('gift-container');
+        const giftBox = document.getElementById('gift-box');
+        const giftImages = document.getElementById('gift-images');
+
+        function loadQuestion() {
+            const currentQuestion = questions[currentQuestionIndex];
+            questionText.textContent = currentQuestion.question;
+
+            answerButtons.forEach((button, index) => {
+                button.textContent = currentQuestion.answers[index];
+                button.onclick = () => checkAnswer(index);
+            });
+
+            resultMessage.textContent = '';
+            imageContainer.style.display = 'none';
+            nextButton.style.display = 'none';
+        }
+
+        function checkAnswer(answer) {
+            const correct = questions[currentQuestionIndex].correct;
+            const isCorrect = answer === correct;
+
+            if (isCorrect) {
+                resultMessage.textContent = "Wowww! Em trả lời đúng rồi đó 🎉";
+                resultMessage.style.color = "#5cb85c";
+                rewardImage.src = "images/anh5.jpg"; 
+                rewardImage.style.width = "200px"; 
+                rewardImage.style.height = "200px";
+                rewardImage.style.fontSize = "2px"; // Corrected property name
+                answeredCorrectly = true;
+                wrongAnswersCount = 0; // Reset wrong answers count
+            } else {
+                wrongAnswersCount++; // Increment wrong answers count
+                resultMessage.textContent = "Ủaaaa! Em trả lời sai rồi kìa 😢";
+                resultMessage.style.color = "#d9534f";
+                rewardImage.src = "images/anh4.jpg"; 
+                rewardImage.style.width = "200px"; 
+                rewardImage.style.height = "200px"; 
+                rewardImage.style.fontSize = "2px"; // Corrected property name
+            }
+
+            imageContainer.style.display = "block";
+
+            if (answeredCorrectly || wrongAnswersCount < 2) {
+                if (answeredCorrectly) {
+                    currentQuestionIndex++;
+                    if (currentQuestionIndex >= questions.length) {
+                        giftContainer.style.display = 'block';
+                        nextButton.style.display = 'none';
+                    } else {
+                        nextButton.style.display = 'block';
+                    }
+                }
+            }
+        }
+
+        giftBox.addEventListener('click', () => {
+            giftBox.classList.add('explode');
+            setTimeout(() => {
+                giftImages.style.display = 'flex'; 
+                giftBox.style.display = 'none';
+            }, 500);
+        });
+
+        nextButton.addEventListener('click', () => {
+            answeredCorrectly = false; // Reset for the next question
+            loadQuestion();
+        });
+        window.onload = loadQuestion;
+    </script>
+</body>
+</html>
